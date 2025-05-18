@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrast Checker</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1>Contrast Checker</h1>
+        </header>
+
+        <main class="checker-tool">
+            <section class="colour-inputs-grid">
+                <div class="colour-column">
+                    <h2>Foreground</h2>
+                    <div class="colour-input-group">
+                        <label for="foreground-colour-text">Hex Value</label>
+                        <div class="input-wrapper">
+                            <span class="hex-prefix">#</span>
+                            <input type="text" id="foreground-colour-text" value="FFFFFF"
+                                aria-label="Foreground Colour Hex Code">
+                            <input type="color" id="foreground-colour-picker" value="#FFFFFF"
+                                aria-label="Foreground Colour Picker">
+                        </div>
+                        <div class="colour-preview" id="foreground-preview" style="background-color: #FFFFFF;"></div>
+                    </div>
+                    <div class="modifier-group">
+                        <label for="foreground-alpha">Alpha</label>
+                        <input type="number" id="foreground-alpha" min="0" max="1" step="0.01" value="1"
+                            aria-label="Foreground Alpha">
+                    </div>
+                    <div class="modifier-group">
+                        <label for="foreground-lightness">Lightness</label>
+                        <input type="range" id="foreground-lightness" min="0" max="100" value="100"
+                            aria-label="Foreground Lightness">
+                        <div class="lightness-value-display" id="foreground-lightness-value">100%</div>
+                    </div>
+                </div>
+
+                <div class="colour-column">
+                    <h2>Background</h2>
+                    <div class="colour-input-group">
+                        <label for="background-colour-text">Hex Value</label>
+                        <div class="input-wrapper">
+                            <span class="hex-prefix">#</span>
+                            <input type="text" id="background-colour-text" value="000000"
+                                aria-label="Background Colour Hex Code">
+                            <input type="color" id="background-colour-picker" value="#000000"
+                                aria-label="Background Colour Picker">
+                        </div>
+                        <div class="colour-preview" id="background-preview" style="background-color: #000000;"></div>
+                    </div>
+                    <div class="modifier-group">
+                        <label for="background-alpha">Alpha</label>
+                        <input type="number" id="background-alpha" min="0" max="1" step="0.01" value="1"
+                            aria-label="Background Alpha">
+                    </div>
+                    <div class="modifier-group">
+                        <label for="background-lightness">Lightness</label>
+                        <input type="range" id="background-lightness" min="0" max="100" value="0"
+                            aria-label="Background Lightness">
+                        <div class="lightness-value-display" id="background-lightness-value">0%</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="results-display">
+                <h3>Results</h3>
+                <div class="contrast-ratio-container">
+                    <span class="ratio-label">Contrast Ratio:</span>
+                    <span id="contrast-ratio" class="ratio-value">21.00:1</span>
+                </div>
+
+                <div class="sample-text-container">
+                    <p id="sample-text" style="color: #FFFFFF; background-color: #000000;">
+                        The quick brown fox jumps over the lazy dog.
+                    </p>
+                </div>
+                <p class="alpha-warning" id="alpha-warning-message" style="display:none;">Alpha values less than 1 are
+                    blended against a white background for calculation.</p>
+
+
+                <div class="wcag-guidelines">
+                    <h4>WCAG Compliance</h4>
+                    <div class="guideline-group">
+                        <h5>Normal Text (AA)</h5>
+                        <p id="wcag-normal-aa" class="status pass">Pass (Ratio: 4.5:1)</p>
+                    </div>
+                    <div class="guideline-group">
+                        <h5>Large Text (AA)</h5>
+                        <p id="wcag-large-aa" class="status pass">Pass (Ratio: 3:1)</p>
+                    </div>
+                    <div class="guideline-group">
+                        <h5>Normal Text (AAA)</h5>
+                        <p id="wcag-normal-aaa" class="status pass">Pass (Ratio: 7:1)</p>
+                    </div>
+                    <div class="guideline-group">
+                        <h5>Large Text (AAA)</h5>
+                        <p id="wcag-large-aaa" class="status pass">Pass (Ratio: 4.5:1)</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>WCAG Color Contrast Checker</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

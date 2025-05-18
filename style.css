@@ -1,0 +1,351 @@
+:root {
+    --page-background-color: #f5f5f7; /* Light grey, common in Apple UIs */
+    --card-background-color: #ffffff;
+    --text-color-primary: #1d1d1f; /* Apple's primary text colour */
+    --text-color-secondary: #6e6e73; /* For labels, secondary info */
+    --accent-color: #007aff; /* Apple's classic blue */
+    --border-color-soft: #d2d2d7; /* Softer border for UI elements */
+    --border-color-strong: #bcbcc0; /* Slightly stronger for emphasis if needed */
+    --input-background-color: #ffffff; /* Inputs on white card often also white */
+    --input-border-color: #c6c6c8;
+    --input-focus-border-color: var(--accent-color);
+    --input-focus-shadow: 0 0 0 3px rgba(0, 122, 255, 0.25);
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --border-radius-standard: 10px; /* Slightly softer than before */
+    --border-radius-input: 7px;
+    --box-shadow-standard: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--page-background-color);
+    color: var(--text-color-primary);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    line-height: 1.5; /* Adjusted for better text flow */
+}
+
+.container {
+    width: 100%;
+    max-width: 800px; /* Increased width for two columns */
+    background-color: var(--card-background-color);
+    border-radius: var(--border-radius-standard);
+    box-shadow: var(--box-shadow-standard);
+    padding: 25px 35px; /* Adjusted padding */
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color-soft);
+}
+
+.app-header h1 {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text-color-primary);
+    margin: 0;
+}
+
+.checker-tool {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.colour-inputs-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Default to single column */
+    gap: 30px;
+}
+
+@media (min-width: 700px) { /* Switch to two columns on wider screens */
+    .colour-inputs-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px; /* More gap for columns */
+    }
+}
+
+.colour-column h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color-primary);
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color-soft);
+}
+
+
+.colour-input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.colour-input-group label,
+.modifier-group label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color-secondary);
+    margin-bottom: 6px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius-input);
+    background-color: var(--input-background-color);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-wrapper:focus-within {
+    border-color: var(--input-focus-border-color);
+    box-shadow: var(--input-focus-shadow);
+}
+
+.input-wrapper .hex-prefix {
+    padding-left: 10px;
+    font-size: 15px;
+    color: var(--text-color-secondary);
+}
+
+.colour-input-group input[type="text"] {
+    flex-grow: 1;
+    padding: 9px 10px 9px 5px; /* Adjusted padding */
+    font-size: 15px;
+    font-family: "Menlo", "Consolas", monospace; /* Monospace for hex */
+    border: none;
+    border-radius: 0; /* Border handled by wrapper */
+    background-color: transparent;
+    color: var(--text-color-primary);
+    outline: none;
+    text-transform: uppercase;
+}
+
+.colour-input-group input[type="color"] {
+    width: 38px;
+    height: 36px; /* Match text input height incl. padding */
+    border: none;
+    background: none;
+    border-radius: 0 var(--border-radius-input) var(--border-radius-input) 0;
+    padding: 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-left: 1px solid var(--input-border-color); /* Separator */
+}
+
+.colour-input-group input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; border:none; border-radius: 0 5px 5px 0;}
+.colour-input-group input[type="color"]::-webkit-color-swatch { border: none; border-radius: 0 5px 5px 0;}
+.colour-input-group input[type="color"]::-moz-color-swatch { border: none; border-radius: 0 5px 5px 0;}
+
+
+.colour-preview {
+    width: 100%;
+    height: 45px;
+    border-radius: var(--border-radius-input);
+    margin-top: 8px;
+    border: 1px solid var(--border-color-soft);
+    transition: background-color 0.3s ease;
+}
+
+.modifier-group {
+    margin-bottom: 20px;
+}
+
+.modifier-group input[type="number"],
+.modifier-group input[type="range"] {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius-input);
+    background-color: var(--input-background-color);
+    color: var(--text-color-primary);
+    box-sizing: border-box; /* Important for width: 100% */
+}
+.modifier-group input[type="number"]:focus,
+.modifier-group input[type="range"]:focus {
+    outline: none;
+    border-color: var(--input-focus-border-color);
+    box-shadow: var(--input-focus-shadow);
+}
+
+.modifier-group input[type="range"] {
+    padding: 0; /* Remove padding for range */
+    height: 8px; /* Standard height for the track */
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--border-color-soft); /* Default track, will be overridden by JS */
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 4px; /* Space for label */
+}
+
+/* Range Slider Thumb - WebKit */
+.modifier-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--card-background-color);
+    border: 1px solid var(--border-color-strong);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    margin-top: -6px; /* Vertically center thumb on track */
+}
+
+/* Range Slider Thumb - Mozilla */
+.modifier-group input[type="range"]::-moz-range-thumb {
+    width: 18px; /* Slightly different for consistency */
+    height: 18px;
+    background: var(--card-background-color);
+    border: 1px solid var(--border-color-strong);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.lightness-value-display {
+    font-size: 12px;
+    color: var(--text-color-secondary);
+    text-align: right;
+    margin-top: 4px;
+}
+
+
+.results-display {
+    background-color: var(--page-background-color);
+    padding: 20px 25px;
+    border-radius: var(--border-radius-standard);
+    border: 1px solid var(--border-color-soft);
+}
+
+.results-display h3 { /* Changed from h2 for better hierarchy */
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--text-color-primary);
+}
+
+.contrast-ratio-container {
+    display: flex;
+    align-items: baseline;
+    font-size: 18px; /* Adjusted size */
+    margin-bottom: 20px;
+    background-color: var(--card-background-color);
+    padding: 12px 18px;
+    border-radius: var(--border-radius-input);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color-soft);
+}
+
+.ratio-label {
+    font-weight: 500;
+    color: var(--text-color-secondary);
+    margin-right: 10px;
+}
+
+.ratio-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-color-primary);
+}
+
+.sample-text-container {
+    padding: 20px;
+    border-radius: var(--border-radius-input);
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid var(--border-color-soft);
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-clip: padding-box; /* Ensures background doesn't bleed under border */
+}
+
+#sample-text {
+    font-size: 16px; /* Normal text size */
+    text-align: center;
+}
+
+.alpha-warning {
+    font-size: 13px;
+    color: var(--text-color-secondary);
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 8px;
+    background-color: #fffbe6; /* A light yellow for warning */
+    border: 1px solid #ffe58f;
+    border-radius: var(--border-radius-input);
+}
+
+
+.wcag-guidelines h4 { /* Changed from h3 */
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: var(--text-color-primary);
+}
+
+.guideline-group {
+    margin-bottom: 12px;
+    padding: 10px 15px;
+    border-radius: var(--border-radius-input);
+    background-color: var(--card-background-color);
+    border: 1px solid #e8e8e8; /* Slightly softer border */
+}
+
+.guideline-group h5 { /* Changed from h4 */
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 4px 0;
+    color: var(--text-color-primary);
+}
+
+.guideline-group .status {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.guideline-group .status.pass {
+    color: #22863a; /* GitHub's green */
+    background-color: #f0fff4;
+    border: 1px solid #a0e8af;
+}
+
+.guideline-group .status.fail {
+    color: #cb2431; /* GitHub's red */
+    background-color: #fff8f8;
+    border: 1px solid #f4c8c9;
+}
+
+.app-footer {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-color-soft);
+}
+
+.app-footer p {
+    font-size: 12px;
+    color: var(--text-color-secondary);
+    margin: 0;
+}
