@@ -65,14 +65,3 @@ A web-based tool to calculate the contrast ratio between foreground and backgrou
     * The foreground colour (if it has an alpha value less than 1) is then blended against this (potentially already blended) effective background colour.
     * The final contrast is calculated between these two *effective visual colours*.
 * **WCAG Formulae:** The luminance and contrast ratio calculations adhere to the standards defined in the Web Content Accessibility Guidelines.
-
-## Screenshots
-
-*(You can add screenshots of the application here if you wish.)*
-
-**Example:**
-`![Contrast Checker Interface](path/to/your/screenshot.png)`
-
----
-
-This README provides a comprehensive overview for users and developers interacting with your Contrast Checker.
